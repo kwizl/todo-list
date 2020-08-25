@@ -1,16 +1,19 @@
 const ToDoItem = (data) => {
-  let title = data.title;
-  let description = data.description;
-  let dueDate = data.dueDate;
-  let priority = data.priority;
-  
-  const getTitle = () => { return title };
-  const getDescription = () => { return description };
-  const getDueDate = () => { return dueDate };
-  const getPriority = () => { return priority };
+  const { title } = data;
+  const { description } = data;
+  const { dueDate } = data;
+  const { priority } = data;
 
-  return { getTitle, getDescription, getDueDate, getPriority };
+  const getTitle = () => title;
+  const getDescription = () => description;
+  const getDueDate = () => dueDate;
+  const getPriority = () => priority;
+
+  return {
+    getTitle, getDescription, getDueDate, getPriority,
+  };
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { ToDoItem };
+module.exports = {
+  ToDoItem,
+};
