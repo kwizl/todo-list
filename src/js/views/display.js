@@ -1,7 +1,25 @@
 const Display = () => {
   const createProjectForm = () => {
-    const listForm = document.querySelector('.list-content');
+    const projectForm = document.querySelector('.project');
     var newHTML = `<form id="form-project" class="project-form active">
+    <p>Create a Project</p>
+    <input type="text" id="proj-title" class="task-form-field" placeholder="Title"><br/>
+    <div class="project-submit">
+      <button id="btn-cancel__project" class="form-btn__cancel">Cancel</button>
+      <button id="btn-submit__project" class="form-btn__submit">Create</button>
+    </div>
+    </form>`
+    projectForm.insertAdjacentHTML('beforeend', newHTML);
+  };
+
+  const deleteProjectForm = () => {
+    const formProject = document.getElementById('form-project');
+    formProject.parentNode.removeChild(formProject);
+  };
+
+  const createListForm = () => {
+    const listForm = document.querySelector('.list-content');
+    var newHTML = `<form id="form-list" class="project-form active">
       <p>Add a Task to a Project</p>
       <select name="Project" id="project" class="task-form-field" >
         <option value="Low">Low</option>
@@ -22,12 +40,14 @@ const Display = () => {
     listForm.insertAdjacentHTML('beforeend', newHTML) 
   };
 
+
+
   const deleteListForm = () => {
-    const formList = document.getElementById('form-project');
+    const formList = document.getElementById('form-list');
     formList.parentNode.removeChild(formList);
   };
 
-  return { createProjectForm, deleteListForm };
+  return { createProjectForm, deleteProjectForm, createListForm, deleteListForm };
 };
 
 // eslint-disable-next-line import/prefer-default-export

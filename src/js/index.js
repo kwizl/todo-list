@@ -3,7 +3,7 @@ import { Display } from './views/display';
 
 document.querySelector('.new-list').addEventListener('click', () => {
   const display = Display();
-  display.createProjectForm();
+  display.createListForm();
 });
 
 document.querySelector('.list').addEventListener('click', (event) => {
@@ -12,4 +12,17 @@ document.querySelector('.list').addEventListener('click', (event) => {
   const display = Display();
   display.deleteListForm();
   }
+});
+
+document.getElementById('btn-create__project').addEventListener('click', () => {
+  const display = Display();
+  display.createProjectForm();
+});
+
+document.querySelector('.project').addEventListener('click', (event) => {
+  event.preventDefault();
+  if (event.target.id === 'btn-cancel__project') {
+    const display = Display();
+    display.deleteProjectForm();
+  };
 });
