@@ -1,7 +1,7 @@
 const Display = () => {
   const createProjectForm = () => {
-    const mainContent = document.getElementById('main-content');
-    mainContent.innerHTML = `<form id="form-project" class="project-form active">
+    const listForm = document.querySelector('.list-content');
+    var newHTML = `<form id="form-project" class="project-form active">
       <p>Add a Task to a Project</p>
       <select name="Project" id="project" class="task-form-field" >
         <option value="Low">Low</option>
@@ -15,19 +15,19 @@ const Display = () => {
         <option value="High">High</option>
       </select>
       <div class="project-submit" >
-        <button id="btn-cancel__project" class="btn-form__cancel">Cancel</button>
-        <button id="btn-submit__project" class="btn-form__submit">Submit</button>
+        <button id="btn-cancel__list" class="form-btn__cancel">Cancel</button>
+        <button id="btn-submit__list" class="form-btn__submit">Submit</button>
       </div>
     </form>`;
+    listForm.insertAdjacentHTML('beforeend', newHTML) 
   };
 
-  const deleteProjectForm = () => {
-    const mainContent = document.getElementById('main-content');
-    const form = document.getElementById('form-project');
-    mainContent.parentNode.removeChild(form);
+  const deleteListForm = () => {
+    const formList = document.getElementById('form-project');
+    formList.parentNode.removeChild(formList);
   };
 
-  return { createProjectForm, deleteProjectForm };
+  return { createProjectForm, deleteListForm };
 };
 
 // eslint-disable-next-line import/prefer-default-export
