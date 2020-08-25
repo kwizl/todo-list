@@ -14,7 +14,7 @@
       <div class="sidebar">
         <p class="title">To Do List</p>
         <div class="project">
-          <button class="new-project">Create Project</button>
+          <button id="btn-create__project" class="new-project">Create Project</button>
           <hr class="line">
         </div>
         <div class="list">
@@ -30,27 +30,7 @@
           </div>
         </div>
       </div>
-      <div class="main-content">
-        
-        <form id="bla" class="project-form active">
-          <p>Add a Task to a Project</p>
-          <select name="Project" id="project" class="task-form-field" >
-            <option value="Low">Low</option>
-          </select><br>
-          <input type="text" id="title" class="task-form-field" placeholder="Title"><br/>
-          <input type="text" id="desc" class="task-form-field" placeholder="Description"><br/>
-          <input type="text" id="date" class="task-form-field" placeholder="dueDate"><br/>
-          <select name="Priority" id="priority" class="task-form-field" >
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-          </select>
-          <div class="project-submit" >
-            <button class="btn-form__cancel">Cancel</button>
-            <button class="btn-form__submit">Submit</button>
-          </div>
-        </form>
-
+      <div id="main-content" class="main-content">
         <div class="project-list__content">
           <div class="project-list">
             <p>Personal</p>
