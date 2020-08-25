@@ -68,14 +68,11 @@
 .project-form {
   visibility: hidden;
   background-color: rgb(199, 196, 196);
-  padding-top: 40px;
-  width: 350px;
-  height: 440px;
+  margin: 10px auto 0;
+  padding: 10px 0 10px 0;
+  width: 90%;
   text-align: center;
   border-radius: 6px;
-  position: absolute;
-  top: calc((100vh - 440px) / 2);
-  left: calc((100vh - 370px) / 2);
 }
 
 .project-form > p {
@@ -85,13 +82,16 @@
 
 .task-form-field {
   margin-bottom: 20px;
-  width: 280px;
-  padding: 8px 5px 8px 5px;
+  width: 85%;
+  padding: 4px 3px 4px 3px;
   border-radius: 5px;
 }
 
 .form-btn__cancel, .form-btn__submit {
-  padding: 5px 10px 5px 10px;
+  padding: 2px 10px;
+  border-radius: 15px;
+  font-weight: bold;
+  color: black;
 }
 
 .project-list__content {
