@@ -1,2 +1,1 @@
-import {ToDoItem} from './modules/toDoItem';
-
+import { ToDoItem } from './modules/toDoItem';
