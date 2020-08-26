@@ -1,14 +1,14 @@
 const Display = () => {
   const createProjectForm = () => {
     const projectForm = document.querySelector('.project');
-    var newHTML = `<form id="form-project" class="project-form active">
+    const newHTML = `<form id="form-project" class="project-form active">
     <p>Create a Project</p>
     <input type="text" id="proj-title" class="task-form-field" placeholder="Title"><br/>
     <div class="project-submit">
       <button id="btn-cancel__project" class="form-btn__cancel">Cancel</button>
       <button id="btn-submit__project" class="form-btn__submit">Create</button>
     </div>
-    </form>`
+    </form>`;
     projectForm.insertAdjacentHTML('beforeend', newHTML);
   };
 
@@ -19,7 +19,7 @@ const Display = () => {
 
   const createListForm = () => {
     const listForm = document.querySelector('.list-content');
-    var newHTML = `<form id="form-list" class="project-form active">
+    const newHTML = `<form id="form-list" class="project-form active">
       <p>Add a Task to a Project</p>
       <select name="Project" id="project" class="task-form-field" >
         <option value="Low">Low</option>
@@ -37,9 +37,8 @@ const Display = () => {
         <button id="btn-submit__list" class="form-btn__submit">Submit</button>
       </div>
     </form>`;
-    listForm.insertAdjacentHTML('beforeend', newHTML) 
+    listForm.insertAdjacentHTML('beforeend', newHTML);
   };
-
 
 
   const deleteListForm = () => {
@@ -47,7 +46,9 @@ const Display = () => {
     formList.parentNode.removeChild(formList);
   };
 
-  return { createProjectForm, deleteProjectForm, createListForm, deleteListForm };
+  return {
+    createProjectForm, deleteProjectForm, createListForm, deleteListForm,
+  };
 };
 
 // eslint-disable-next-line import/prefer-default-export
