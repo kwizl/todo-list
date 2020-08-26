@@ -12,6 +12,14 @@ const Display = () => {
     projectForm.insertAdjacentHTML('beforeend', newHTML);
   };
 
+  const projectList = () => {
+    const parent = document.querySelector('.project-names');
+    const el = document.createElement('p');
+    parent.appendChild(el);
+    el.classList.add('project-item');
+    el.textContent = localStorage.getItem('project');
+  };
+
   const deleteProjectForm = () => {
     const formProject = document.getElementById('form-project');
     formProject.parentNode.removeChild(formProject);
@@ -47,7 +55,7 @@ const Display = () => {
   };
 
   return {
-    createProjectForm, deleteProjectForm, createListForm, deleteListForm,
+    createProjectForm, deleteProjectForm, createListForm, deleteListForm, projectList,
   };
 };
 

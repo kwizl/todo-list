@@ -45,5 +45,6 @@ document.querySelector('.project').addEventListener('click', (event) => {
     const projectTitle = document.getElementById('proj-title').value;
     localStorage.setItem('project', projectTitle);
     display.deleteProjectForm();
+    display.projectList();
   }
 });
