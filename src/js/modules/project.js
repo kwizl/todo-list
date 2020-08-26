@@ -1,4 +1,4 @@
-import { ToDoItem } from './toDoItem'
+import ToDoItem from './toDoItem'
 
 const Project = (ptitle) => {
   var title = ptitle;

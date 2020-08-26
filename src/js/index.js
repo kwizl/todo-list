@@ -1,4 +1,4 @@
-import { ToDoItem } from './modules/toDoItem';
+import ToDoItem from './modules/toDoItem';
 import { Project } from './modules/project';
 import { Display } from './views/display';
 
@@ -21,8 +21,10 @@ document.querySelector('.list').addEventListener('click', (event) => {
       dueDate: document.getElementById('date').value,
       priority: document.getElementById('priority').value
     };
-
-    localStorage.setItem('projects', JSON.stringify(todoItem));
+    var test = ToDoItem(todoItem);
+    console.log('check it out:');
+    console.log(test.getData());
+    localStorage.setItem('projects', JSON.stringify(test.getData()));
   }
 });
 
@@ -43,4 +45,3 @@ document.querySelector('.project').addEventListener('click', (event) => {
     localStorage.setItem('project', project_title);
   };
 });
-
