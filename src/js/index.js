@@ -11,20 +11,21 @@ document.querySelector('.new-list').addEventListener('click', () => {
 
 document.querySelector('.list').addEventListener('click', (event) => {
   event.preventDefault();
+  const display = Display();
   if (event.target.id === 'btn-cancel__list') {
-    const display = Display();
     display.deleteListForm();
   } else if (event.target.id === 'btn-submit__list') {
     const todoItem = {
       title: document.getElementById('title').value,
       description: document.getElementById('desc').value,
       dueDate: document.getElementById('date').value,
-      priority: document.getElementById('priority').value
+      priority: document.getElementById('priority').value,
     };
-    var test = ToDoItem(todoItem);
+    const test = ToDoItem(todoItem);
     console.log('check it out:');
     console.log(test.getData());
     localStorage.setItem('projects', JSON.stringify(test.getData()));
+    display.deleteListForm();
   }
 });
 
@@ -37,11 +38,12 @@ document.getElementById('btn-create__project').addEventListener('click', () => {
 
 document.querySelector('.project').addEventListener('click', (event) => {
   event.preventDefault();
+  const display = Display();
   if (event.target.id === 'btn-cancel__project') {
-    const display = Display();
     display.deleteProjectForm();
   } else if (event.target.id === 'btn-submit__project') {
-    let project_title = document.getElementById('proj-title').value;
-    localStorage.setItem('project', project_title);
-  };
+    const projectTitle = document.getElementById('proj-title').value;
+    localStorage.setItem('project', projectTitle);
+    display.deleteProjectForm();
+  }
 });

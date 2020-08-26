@@ -1,21 +1,14 @@
 const ToDoItem = (data) => {
-
-  const getData = () => {
-    return {
-      title: data.title,
-      description: data.description,
-      dueDate: data.dueDate,
-      priority: data.priority
-    };
-  }
+  const getData = () => ({
+    title: data.title,
+    description: data.description,
+    dueDate: data.dueDate,
+    priority: data.priority,
+  });
 
   return {
-    getData
+    getData,
   };
 };
 
 export default ToDoItem;
-
-// module.exports = {
-//   ToDoItem,
-// };
