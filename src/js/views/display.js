@@ -1,5 +1,4 @@
 const Display = () => {
-  const array = [];
   const createProjectForm = () => {
     const projectForm = document.querySelector('.project');
     const newHTML = `<form id="form-project" class="project-form active">
@@ -34,9 +33,7 @@ const Display = () => {
     select.appendChild(options);
   };
 
-  const optionProject = () => {
-    const data = JSON.parse(JSON.stringify(localStorage.getItem('project')));
-    array.push(data);
+  const optionProject = (array) => {
     array.forEach((item) => {
       liMaker(item);
     });

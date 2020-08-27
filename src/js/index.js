@@ -2,6 +2,10 @@ import ToDoItem from './modules/toDoItem';
 import { Project } from './modules/project';
 import { Display } from './views/display';
 
+const projectArray = localStorage.getItem('project') ? JSON.stringify(localStorage.getItem('project')) : [];
+localStorage.setItem('project', JSON.stringify(projectArray));
+const data = JSON.parse(localStorage.getItem('project'));
+
 document.querySelector('.new-list').addEventListener('click', () => {
   if (!document.getElementById('form-list')) {
     const display = Display();
@@ -23,8 +27,6 @@ document.querySelector('.list').addEventListener('click', (event) => {
       priority: document.getElementById('priority').value,
     };
     const data = ToDoItem(todoItem);
-    console.log('check it out:');
-    console.log(data.getData());
     localStorage.setItem('projects', JSON.stringify(data.getData()));
     display.deleteListForm();
   }
@@ -43,9 +45,11 @@ document.querySelector('.project').addEventListener('click', (event) => {
   if (event.target.id === 'btn-cancel__project') {
     display.deleteProjectForm();
   } else if (event.target.id === 'btn-submit__project') {
-    const projectTitle = document.getElementById('proj-title').value;
-    localStorage.setItem('project', projectTitle);
+    let projectTitle = document.getElementById('proj-title').value;
+    projectArray.push(projectTitle);
+    localStorage.setItem('project', JSON.stringify(projectArray));
     display.deleteProjectForm();
-    display.projectList();
+    display.projectList(data[data.length - 1]);
+    projectTitle = '';
   }
 });
