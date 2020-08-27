@@ -34,12 +34,12 @@ const Display = () => {
   };
 
   /* const liMaker = (text) => {
-    
+
   }
   */
   const optionProject = (array) => {
     array.forEach((item) => {
-      html = html + '<option value=${item}>${item}</option>';
+      liMaker(item);
     });
   };
 

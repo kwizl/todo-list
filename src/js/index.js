@@ -5,7 +5,7 @@ import { Display } from './views/display';
 const projectArray = localStorage.getItem('project') ? JSON.stringify(localStorage.getItem('project')) : [];
 localStorage.setItem('project', JSON.stringify(projectArray));
 const list = [];
-
+const names = [];
 
 document.querySelector('.new-list').addEventListener('click', () => {
   if (!document.getElementById('form-list')) {
@@ -16,11 +16,11 @@ document.querySelector('.new-list').addEventListener('click', () => {
 
 document.querySelector('.list').addEventListener('click', (event) => {
   event.preventDefault();
-  const data = JSON.parse(localStorage.getItem('project'));
+  const dataProject = JSON.parse(localStorage.getItem('project'));
   const display = Display();
   console.log('data:');
-  console.log(data.title);
-  display.optionProject(data.title);
+  console.log(dataProject.title);
+  display.optionProject(names);
   if (event.target.id === 'btn-cancel__list') {
     display.deleteListForm();
   } else if (event.target.id === 'btn-submit__list') {
@@ -30,7 +30,7 @@ document.querySelector('.list').addEventListener('click', (event) => {
       dueDate: document.getElementById('date').value,
       priority: document.getElementById('priority').value,
     };
-    const data = ToDoItem(todoItem);
+    // const data = ToDoItem(todoItem);
     list.push(todoItem);
     // localStorage.setItem('projects', JSON.stringify(data.getData()));
     display.deleteListForm();
@@ -52,14 +52,14 @@ document.querySelector('.project').addEventListener('click', (event) => {
     display.deleteProjectForm();
   } else if (event.target.id === 'btn-submit__project') {
     let projectTitle = document.getElementById('proj-title').value;
-    projectArray.push(projectTitle);
-
     const newProject = Project(projectTitle);
     newProject.todos.push(list);
     // localStorage.setItem('project', JSON.stringify(projectArray));
     localStorage.setItem('project', JSON.stringify(newProject));
+    const dataProject = JSON.parse(localStorage.getItem('project'));
+    names.push(dataProject.title);
     display.deleteProjectForm();
-    display.projectList(data[data.length - 1]);
+    display.projectList();
     projectTitle = '';
   }
 });
