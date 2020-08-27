@@ -4,7 +4,8 @@ import { Display } from './views/display';
 
 const projectArray = localStorage.getItem('project') ? JSON.stringify(localStorage.getItem('project')) : [];
 localStorage.setItem('project', JSON.stringify(projectArray));
-const data = JSON.parse(localStorage.getItem('project'));
+const list = [];
+
 
 document.querySelector('.new-list').addEventListener('click', () => {
   if (!document.getElementById('form-list')) {
@@ -15,8 +16,11 @@ document.querySelector('.new-list').addEventListener('click', () => {
 
 document.querySelector('.list').addEventListener('click', (event) => {
   event.preventDefault();
+  const data = JSON.parse(localStorage.getItem('project'));
   const display = Display();
-  display.optionProject();
+  console.log('data:');
+  console.log(data.title);
+  display.optionProject(data.title);
   if (event.target.id === 'btn-cancel__list') {
     display.deleteListForm();
   } else if (event.target.id === 'btn-submit__list') {
@@ -27,9 +31,10 @@ document.querySelector('.list').addEventListener('click', (event) => {
       priority: document.getElementById('priority').value,
     };
     const data = ToDoItem(todoItem);
-    localStorage.setItem('projects', JSON.stringify(data.getData()));
+    list.push(todoItem);
+    // localStorage.setItem('projects', JSON.stringify(data.getData()));
     display.deleteListForm();
-  }
+  };
 });
 
 document.getElementById('btn-create__project').addEventListener('click', () => {
@@ -37,6 +42,7 @@ document.getElementById('btn-create__project').addEventListener('click', () => {
     const display = Display();
     display.createProjectForm();
   }
+  console.log(list);
 });
 
 document.querySelector('.project').addEventListener('click', (event) => {
@@ -47,7 +53,11 @@ document.querySelector('.project').addEventListener('click', (event) => {
   } else if (event.target.id === 'btn-submit__project') {
     let projectTitle = document.getElementById('proj-title').value;
     projectArray.push(projectTitle);
-    localStorage.setItem('project', JSON.stringify(projectArray));
+
+    const newProject = Project(projectTitle);
+    newProject.todos.push(list);
+    // localStorage.setItem('project', JSON.stringify(projectArray));
+    localStorage.setItem('project', JSON.stringify(newProject));
     display.deleteProjectForm();
     display.projectList(data[data.length - 1]);
     projectTitle = '';

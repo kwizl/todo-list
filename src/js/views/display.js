@@ -33,9 +33,13 @@ const Display = () => {
     select.appendChild(options);
   };
 
+  /* const liMaker = (text) => {
+    
+  }
+  */
   const optionProject = (array) => {
     array.forEach((item) => {
-      liMaker(item);
+      html = html + '<option value=${item}>${item}</option>';
     });
   };
 
