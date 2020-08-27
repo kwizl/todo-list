@@ -1,4 +1,5 @@
 const Display = () => {
+  const array = [];
   const createProjectForm = () => {
     const projectForm = document.querySelector('.project');
     const newHTML = `<form id="form-project" class="project-form active">
@@ -25,12 +26,27 @@ const Display = () => {
     formProject.parentNode.removeChild(formProject);
   };
 
+  const liMaker = (text) => {
+    const select = document.getElementById('project');
+    const options = document.createElement('option');
+    options.textContent = text;
+    options.value = text;
+    select.appendChild(options);
+  };
+
+  const optionProject = () => {
+    const data = JSON.parse(JSON.stringify(localStorage.getItem('project')));
+    array.push(data);
+    array.forEach((item) => {
+      liMaker(item);
+    });
+  };
+
   const createListForm = () => {
     const listForm = document.querySelector('.list-content');
     const newHTML = `<form id="form-list" class="project-form active">
       <p>Add a Task to a Project</p>
       <select name="Project" id="project" class="task-form-field" >
-        <option value="Low">Low</option>
       </select><br>
       <input type="text" id="title" class="task-form-field" placeholder="Title"><br/>
       <input type="text" id="desc" class="task-form-field" placeholder="Description"><br/>
@@ -55,7 +71,12 @@ const Display = () => {
   };
 
   return {
-    createProjectForm, deleteProjectForm, createListForm, deleteListForm, projectList,
+    createProjectForm,
+    deleteProjectForm,
+    createListForm,
+    deleteListForm,
+    projectList,
+    optionProject,
   };
 };
 

@@ -12,6 +12,7 @@ document.querySelector('.new-list').addEventListener('click', () => {
 document.querySelector('.list').addEventListener('click', (event) => {
   event.preventDefault();
   const display = Display();
+  display.optionProject();
   if (event.target.id === 'btn-cancel__list') {
     display.deleteListForm();
   } else if (event.target.id === 'btn-submit__list') {
@@ -21,10 +22,10 @@ document.querySelector('.list').addEventListener('click', (event) => {
       dueDate: document.getElementById('date').value,
       priority: document.getElementById('priority').value,
     };
-    const test = ToDoItem(todoItem);
+    const data = ToDoItem(todoItem);
     console.log('check it out:');
-    console.log(test.getData());
-    localStorage.setItem('projects', JSON.stringify(test.getData()));
+    console.log(data.getData());
+    localStorage.setItem('projects', JSON.stringify(data.getData()));
     display.deleteListForm();
   }
 });
