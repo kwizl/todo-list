@@ -25,13 +25,6 @@ const Display = () => {
     formProject.parentNode.removeChild(formProject);
   };
 
-  const liMaker = (text) => {
-    const select = document.getElementById('project');
-    const options = document.createElement('option');
-    options.textContent = text;
-    options.value = text;
-    select.appendChild(options);
-  };
 
   const optionProject = (array) => {
     var html = "";
@@ -46,7 +39,7 @@ const Display = () => {
     const listForm = document.querySelector('.list-content');
     const rawHTML = `<form id="form-list" class="project-form active">
       <p>Add a Task to a Project</p>
-      <select name="Project" id="project" class="task-form-field">
+      <select name="Project-to-add" id="project-to-add" class="task-form-field">
         %change%
       </select><br>
       <input type="text" id="title" class="task-form-field" placeholder="Title"><br/>

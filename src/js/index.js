@@ -2,9 +2,6 @@ import ToDoItem from './modules/toDoItem';
 import { Project } from './modules/project';
 import { Display } from './views/display';
 
-const list = [];
-const names = [];
-
 const projectArray = [];
 var defaultProject = Project('General');
 
@@ -16,6 +13,19 @@ function populateArray() {
   });
 };
 
+function populate(projName, todoAdding) {
+  const test = JSON.parse(localStorage.getItem('project'));
+  projectArray.splice(0, projectArray.length);
+  test.forEach(function(current) {
+    if (current.title !== projName) {
+      projectArray.push(current);
+    } else {
+      current.todos.push(todoAdding);
+      projectArray.push(current);
+    };
+  });
+  localStorage.setItem('project', JSON.stringify(test));
+};
 
 window.onload = function(){
   if (localStorage.length === 0) {
@@ -36,19 +46,18 @@ document.querySelector('.new-list').addEventListener('click', () => {
 
 document.querySelector('.list').addEventListener('click', (event) => {
   event.preventDefault();
-  const dataProject = JSON.parse(localStorage.getItem('project'));
   const display = Display();
   if (event.target.id === 'btn-cancel__list') {
     display.deleteListForm();
   } else if (event.target.id === 'btn-submit__list') {
+    const whichProject = document.getElementById('project-to-add').value;
     const todoItem = {
       title: document.getElementById('title').value,
       description: document.getElementById('desc').value,
       dueDate: document.getElementById('date').value,
       priority: document.getElementById('priority').value,
     };
-    list.push(todoItem);
-    // localStorage.setItem('projects', JSON.stringify(data.getData()));
+    populate(whichProject, todoItem);
     display.deleteListForm();
   };
 });
@@ -58,7 +67,6 @@ document.getElementById('btn-create__project').addEventListener('click', () => {
     const display = Display();
     display.createProjectForm();
   }
-  console.log(list);
 });
 
 document.querySelector('.project').addEventListener('click', (event) => {
@@ -67,18 +75,11 @@ document.querySelector('.project').addEventListener('click', (event) => {
   if (event.target.id === 'btn-cancel__project') {
     display.deleteProjectForm();
   } else if (event.target.id === 'btn-submit__project') {
-
     let projectTitle = document.getElementById('proj-title').value;
     const newProject = Project(projectTitle);
-    // newProject.todos.push(list);
-    // localStorage.setItem('project', JSON.stringify(projectArray));
     projectArray.push(newProject);
     localStorage.setItem('project', JSON.stringify(projectArray));
-    const dataProject = JSON.parse(localStorage.getItem('project'));
-    names.push(dataProject.title);
     display.deleteProjectForm();
-    // display.projectList();
-    projectTitle = '';
     populateArray();
   }
 });
