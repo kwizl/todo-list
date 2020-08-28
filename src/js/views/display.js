@@ -27,9 +27,9 @@ const Display = () => {
 
 
   const optionProject = (array) => {
-    var html = "";
-    array.forEach(function(current) {
-      html += `<option value="${current.title}">${current.title}</option>`
+    let html = '';
+    array.forEach((current) => {
+      html += `<option value="${current.title}">${current.title}</option>`;
     });
     return html;
   };
@@ -43,7 +43,7 @@ const Display = () => {
         %change%
       </select><br>
       <input type="text" id="title" class="task-form-field" placeholder="Title"><br/>
-      <input type="text" id="desc" class="task-form-field" placeholder="Description"><br/>
+      <textarea type="text" id="desc" class="task-form-field" placeholder="Description"></textarea><br/>
       <input type="text" id="date" class="task-form-field" placeholder="dueDate"><br/>
       <select name="Priority" id="priority" class="task-form-field" >
         <option value="Low">Low</option>
