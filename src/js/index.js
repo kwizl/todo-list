@@ -17,7 +17,16 @@ window.onload = function(){
     projectArray.push(defaultProject);
     localStorage.setItem('project', JSON.stringify(projectArray[0]))
   } else {
-    // console.log(localStorage);
+    const test = JSON.parse(localStorage.getItem('project'));
+    console.log('test');
+    console.log(test);
+    console.log('test on 0');
+    console.log(test[0]);
+    test.forEach(function(current) {
+      projectArray.push(current);
+    });
+    console.log('projectArray: ');
+    console.log(projectArray);
   }
   console.log(localStorage);
   // projectArray.push(defaultProject);
