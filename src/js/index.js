@@ -27,6 +27,34 @@ function populate(projName, todoAdding) {
   localStorage.setItem('project', JSON.stringify(test));
 };
 
+function deleteProject(projName) {
+  const backup = JSON.parse(localStorage.getItem('project'));
+  projectArray.splice(0, projectArray.length);
+  backup.forEach(function(current) {
+    if (current.title !== projName){
+      projectArray.push(current);
+    };
+  });
+};
+
+function deleteTodo(projName, todoName) {
+  const backup = JSON.parse(localStorage.getItem('project'));
+  projectArray.splice(0, projectArray.length);
+  backup.forEach(function(currentProject) {
+    if (currentProject.title === projName) {
+      const aux = Project(projName);
+      currentProject.todos.forEach(function(currentTodo) {
+        if (currentTodo.title !== todoName) {
+          aux.todos.push(currentTodo);
+        };
+      });
+      projectArray.push(aux);
+    } else {
+      projectArray.push(currentProject);
+    };
+  });
+}
+
 window.onload = function(){
   if (localStorage.length === 0) {
     projectArray.push(defaultProject);
