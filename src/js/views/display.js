@@ -33,10 +33,6 @@ const Display = () => {
     select.appendChild(options);
   };
 
-  /* const liMaker = (text) => {
-
-  }
-  */
   const optionProject = (array) => {
     array.forEach((item) => {
       liMaker(item);
@@ -47,7 +43,8 @@ const Display = () => {
     const listForm = document.querySelector('.list-content');
     const newHTML = `<form id="form-list" class="project-form active">
       <p>Add a Task to a Project</p>
-      <select name="Project" id="project" class="task-form-field" >
+      <select name="Project" id="project" class="task-form-field">
+        <option value="Project One">Project One</option>
       </select><br>
       <input type="text" id="title" class="task-form-field" placeholder="Title"><br/>
       <input type="text" id="desc" class="task-form-field" placeholder="Description"><br/>
