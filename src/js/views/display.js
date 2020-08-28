@@ -34,17 +34,20 @@ const Display = () => {
   };
 
   const optionProject = (array) => {
-    array.forEach((item) => {
-      liMaker(item);
+    var html = "";
+    array.forEach(function(current) {
+      html += `<option value="${current.title}">${current.title}</option>`
     });
+    return html;
   };
 
-  const createListForm = () => {
+  const createListForm = (listOfProjects) => {
+    const listOfOptions = optionProject(listOfProjects);
     const listForm = document.querySelector('.list-content');
-    const newHTML = `<form id="form-list" class="project-form active">
+    const rawHTML = `<form id="form-list" class="project-form active">
       <p>Add a Task to a Project</p>
       <select name="Project" id="project" class="task-form-field">
-        <option value="Project One">Project One</option>
+        %change%
       </select><br>
       <input type="text" id="title" class="task-form-field" placeholder="Title"><br/>
       <input type="text" id="desc" class="task-form-field" placeholder="Description"><br/>
@@ -59,9 +62,9 @@ const Display = () => {
         <button id="btn-submit__list" class="form-btn__submit">Submit</button>
       </div>
     </form>`;
+    const newHTML = rawHTML.replace('%change%', listOfOptions);
     listForm.insertAdjacentHTML('beforeend', newHTML);
   };
-
 
   const deleteListForm = () => {
     const formList = document.getElementById('form-list');

@@ -2,41 +2,35 @@ import ToDoItem from './modules/toDoItem';
 import { Project } from './modules/project';
 import { Display } from './views/display';
 
-// const projectArray = localStorage.getItem('project') ? JSON.stringify(localStorage.getItem('project')) : [];
-// localStorage.setItem('project', JSON.stringify(projectArray));
 const list = [];
 const names = [];
 
 const projectArray = [];
 var defaultProject = Project('General');
 
+function populateArray() {
+  const test = JSON.parse(localStorage.getItem('project'));
+  projectArray.splice(0, projectArray.length);
+  test.forEach(function(current) {
+    projectArray.push(current);
+  });
+};
+
+
 window.onload = function(){
-  // localStorage.length === 0 ? console.log('length 0') : console.log('length > 0');
-  // projectArray = localStorage.length === 0 ? projectArray.push(defaultProject) : projectArray.push('Hello World');
   if (localStorage.length === 0) {
     projectArray.push(defaultProject);
-    localStorage.setItem('project', JSON.stringify(projectArray[0]))
   } else {
-    const test = JSON.parse(localStorage.getItem('project'));
-    console.log('test');
-    console.log(test);
-    console.log('test on 0');
-    console.log(test[0]);
-    test.forEach(function(current) {
-      projectArray.push(current);
-    });
-    console.log('projectArray: ');
-    console.log(projectArray);
+    populateArray();
   }
+  localStorage.setItem('project', JSON.stringify(projectArray))
   console.log(localStorage);
-  // projectArray.push(defaultProject);
-  // localStorage.setItem('project', JSON.stringify(projectArray[0]));
 }();
 
 document.querySelector('.new-list').addEventListener('click', () => {
   if (!document.getElementById('form-list')) {
     const display = Display();
-    display.createListForm();
+    display.createListForm(projectArray);
   }
 });
 
@@ -44,9 +38,6 @@ document.querySelector('.list').addEventListener('click', (event) => {
   event.preventDefault();
   const dataProject = JSON.parse(localStorage.getItem('project'));
   const display = Display();
-  // console.log('data:');
-  // console.log(dataProject.title);
-  display.optionProject(names);
   if (event.target.id === 'btn-cancel__list') {
     display.deleteListForm();
   } else if (event.target.id === 'btn-submit__list') {
@@ -56,7 +47,6 @@ document.querySelector('.list').addEventListener('click', (event) => {
       dueDate: document.getElementById('date').value,
       priority: document.getElementById('priority').value,
     };
-    // const data = ToDoItem(todoItem);
     list.push(todoItem);
     // localStorage.setItem('projects', JSON.stringify(data.getData()));
     display.deleteListForm();
@@ -87,7 +77,8 @@ document.querySelector('.project').addEventListener('click', (event) => {
     const dataProject = JSON.parse(localStorage.getItem('project'));
     names.push(dataProject.title);
     display.deleteProjectForm();
-    display.projectList();
+    // display.projectList();
     projectTitle = '';
+    populateArray();
   }
 });
