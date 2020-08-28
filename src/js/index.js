@@ -11,15 +11,17 @@ const projectArray = [];
 var defaultProject = Project('General');
 
 window.onload = function(){
-  localStorage.length === 0 ? console.log('length 0') : console.log('length > 0');
+  // localStorage.length === 0 ? console.log('length 0') : console.log('length > 0');
   // projectArray = localStorage.length === 0 ? projectArray.push(defaultProject) : projectArray.push('Hello World');
   if (localStorage.length === 0) {
     projectArray.push(defaultProject);
+    localStorage.setItem('project', JSON.stringify(projectArray[0]))
   } else {
-    console.log(localStorage);
+    // console.log(localStorage);
   }
-  projectArray.push(defaultProject);
-  localStorage.setItem('project', JSON.stringify(projectArray[0]));
+  console.log(localStorage);
+  // projectArray.push(defaultProject);
+  // localStorage.setItem('project', JSON.stringify(projectArray[0]));
 }();
 
 document.querySelector('.new-list').addEventListener('click', () => {
@@ -66,11 +68,13 @@ document.querySelector('.project').addEventListener('click', (event) => {
   if (event.target.id === 'btn-cancel__project') {
     display.deleteProjectForm();
   } else if (event.target.id === 'btn-submit__project') {
+
     let projectTitle = document.getElementById('proj-title').value;
     const newProject = Project(projectTitle);
-    newProject.todos.push(list);
+    // newProject.todos.push(list);
     // localStorage.setItem('project', JSON.stringify(projectArray));
-    localStorage.setItem('project', JSON.stringify(newProject));
+    projectArray.push(newProject);
+    localStorage.setItem('project', JSON.stringify(projectArray));
     const dataProject = JSON.parse(localStorage.getItem('project'));
     names.push(dataProject.title);
     display.deleteProjectForm();
