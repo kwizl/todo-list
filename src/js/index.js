@@ -3,6 +3,7 @@ import { Project } from './modules/project';
 import { Display } from './views/display';
 
 const projectArray = [];
+const display = Display();
 var defaultProject = Project('General');
 
 function populateArray() {
@@ -63,18 +64,18 @@ window.onload = function(){
   }
   localStorage.setItem('project', JSON.stringify(projectArray))
   console.log(localStorage);
+  display.displayProjects(projectArray);
+  document.getElementById('proj-0').classList.add('project-active');
 }();
 
 document.querySelector('.new-list').addEventListener('click', () => {
   if (!document.getElementById('form-list')) {
-    const display = Display();
     display.createListForm(projectArray);
   }
 });
 
 document.querySelector('.list').addEventListener('click', (event) => {
   event.preventDefault();
-  const display = Display();
   if (event.target.id === 'btn-cancel__list') {
     display.deleteListForm();
   } else if (event.target.id === 'btn-submit__list') {
@@ -92,14 +93,12 @@ document.querySelector('.list').addEventListener('click', (event) => {
 
 document.getElementById('btn-create__project').addEventListener('click', () => {
   if (!document.getElementById('form-project')) {
-    const display = Display();
     display.createProjectForm();
   }
 });
 
 document.querySelector('.project').addEventListener('click', (event) => {
   event.preventDefault();
-  const display = Display();
   if (event.target.id === 'btn-cancel__project') {
     display.deleteProjectForm();
   } else if (event.target.id === 'btn-submit__project') {

@@ -63,6 +63,19 @@ const Display = () => {
     const formList = document.getElementById('form-list');
     formList.parentNode.removeChild(formList);
   };
+  
+  // 
+
+  const displayProjects = (listOfProjects) => {
+    var divNames = document.querySelector('.project-names');
+    console.log(listOfProjects);
+
+    listOfProjects.forEach( function(current, index) {
+      console.log(current.title);
+      const newHTML = `<div id="proj-${index}" class="project-box"><h3>${current.title}</h3></div>`;
+      divNames.insertAdjacentHTML('beforeend', newHTML);
+    });
+  };
 
   return {
     createProjectForm,
@@ -71,7 +84,10 @@ const Display = () => {
     deleteListForm,
     projectList,
     optionProject,
+    displayProjects,
   };
+
+  //
 };
 
 // eslint-disable-next-line import/prefer-default-export
