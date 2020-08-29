@@ -5,6 +5,8 @@
   <link rel="stylesheet" href="css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="img/favicon.png" type="image/png">
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet"> 
   <title>To Do List</title>
 </head>
@@ -19,8 +21,42 @@
         <div class="project">
           <button id="btn-create__project" class="new-project">Create Project</button>
         </div>
-        <div class="project-names"></div>
         <hr class="line">
+        <div class="project-names">
+          <div class="div-item">
+            <div class="list-item">Personal</div>
+            <div class="list-icon">
+              <span class="project-icons">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </span>
+              <span class="project-icons">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+          <div class="div-item">
+            <div class="list-item">Work</div>
+            <div class="list-icon">
+              <span class="project-icons">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </span>
+              <span class="project-icons">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+          <div class="div-item">
+            <div class="list-item">Coding</div>
+            <div class="list-icon">
+              <span class="project-icons">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </span>
+              <span class="project-icons">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
       <div id="main-content" class="main-content">
         <div class="list">
@@ -29,36 +65,33 @@
             <button class="new-list">Add List</button>
             <hr class="line">
           </div>
-          <!--<div class="list-item__content">
-            <hr class="line">
-            <p class="list-item">Personal</p>
-            <p class="list-item">Work</p>
-            <p class="list-item">Coding</p>
-          </div>-->
-        </div>
-        <!--<div class="project-list__content">
-          <div class="project-list">
-            <p>Personal</p>
-            <p>Project 2</p>
-            <p>Project 3</p>
-          </div>
-          <div class="project-list">
-            <p>Work</p>
-            <p>Project 5</p>
-            <p>Project 6</p>
-          </div>
         </div>
         <div class="project-list__content">
           <div class="project-list">
-            <p>Personal</p>
-            <p>Project 2</p>
-            <p>Project 3</p>
+            <p class="project-list__title">Project 1</p>
+            <p><a>Project ToDo 1 title</a></p>
+            <p><a>Project ToDo 2 title</a></p>
           </div>
           <div class="project-list">
-            <p>Work</p>
-            <p>Project 5</p>
-            <p>Project 6</p>
-          </div>-->
+            <p class="project-list__title">Project 2</p>
+            <p><a class="todos-view">ToDo 1 title</a></p>
+            <p><a class="todos-view">ToDo 2 title</a></p>
+          </div>
+          <div class="project-list">
+            <p class="project-list__title">Project 3</p>
+            <p><a class="todos-view">ToDo 1 title</a></p>
+            <p><a class="todos-view">ToDo 2 title</a></p>
+          </div>
+          <div class="project-list">
+            <p class="project-list__title">Project 3</p>
+            <p><a class="todos-view">ToDo 1 title</a></p>
+            <p><a class="todos-view">ToDo 2 title</a></p>
+          </div>
+          <div class="project-list">
+            <p class="project-list__title">Project 3</p>
+            <p><a class="todos-view">ToDo 1 title</a></p>
+            <p><a class="todos-view">ToDo 2 title</a></p>
+          </div>
         </div>
       </div>
     </div>
