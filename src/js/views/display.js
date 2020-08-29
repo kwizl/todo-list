@@ -72,7 +72,7 @@ const Display = () => {
 
     listOfProjects.forEach( function(current, index) {
       console.log(current.title);
-      const newHTML = `<div id="proj-${index}" class="project-box"><h3>${current.title}</h3></div>`;
+      const newHTML = `<div id="proj-${index}" class="project-box h3">${current.title}</div>`;
       divNames.insertAdjacentHTML('beforeend', newHTML);
     });
   };

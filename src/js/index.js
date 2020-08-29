@@ -99,6 +99,7 @@ document.getElementById('btn-create__project').addEventListener('click', () => {
 
 document.querySelector('.project').addEventListener('click', (event) => {
   event.preventDefault();
+  console.log(event.target.id);
   if (event.target.id === 'btn-cancel__project') {
     display.deleteProjectForm();
   } else if (event.target.id === 'btn-submit__project') {
@@ -108,5 +109,12 @@ document.querySelector('.project').addEventListener('click', (event) => {
     localStorage.setItem('project', JSON.stringify(projectArray));
     display.deleteProjectForm();
     populateArray();
+  }
+});
+
+document.querySelector('.project-names').addEventListener('click', (event) => {
+  if (/^proj-/.test(event.target.id)) {
+    document.querySelector('.project-active').classList.remove('project-active');
+    document.getElementById(event.target.id).classList.add('project-active');
   }
 });
