@@ -4,10 +4,12 @@
   box-sizing: border-box;
   font-family: 'Noto Serif', serif;
 }
+
 body {
   background-color: #2127b3;
   position: relative;
 }
+
 header > p {
   text-align: center;
   margin-top: 20px;
@@ -26,7 +28,7 @@ header > p {
   margin: 5px;
   border-radius: 5px;
   padding: 25px 10px 25px 10px;
-  height: 96vh;
+  height: auto;
 }
 
 .title {
@@ -92,6 +94,30 @@ header > p {
   right: calc((100vw - 330px) / 2);
 }
 
+.project-names {
+  margin-top: 20px;
+}
+
+.div-item {
+  display: flex;
+}
+
+.list-item {
+  margin-top: 28px;
+  color: white;
+  flex-grow: 1;
+}
+
+.list-icon {
+  margin-top: 28px;
+  color: white;
+  flex-grow: 1;
+  text-align: end;
+}
+
+.project-icons {
+  margin-right: 10px;
+}
 
 #form-project {
   z-index: 10;
@@ -142,13 +168,29 @@ header > p {
 }
 
 .project-list__content {
-  display: flex;
+  margin-left: calc((80% - 300px) /2);
 }
 
 .project-list {
-  background-color: rgb(196, 196, 196);
-  width: 46%;
-  height: 46%;
+  background-color: white;
+  width: 300px;
+  height: auto;
   margin: 10px 5px 10px 22px;
+  padding: 15px;
   border-radius: 5px;
+}
+
+.project-list__title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.todos-view {
+  
+}
+
+.todos-view:hover {
+  color: #2127b3;
+  cursor: pointer;
 }
