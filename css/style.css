@@ -193,3 +193,7 @@ header > p {
 .project-active {
   background-color: rgb(0, 255, 0);
 }
+
+.h3 {
+  font-size: 18px;
+}
