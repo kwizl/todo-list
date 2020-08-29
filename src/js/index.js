@@ -66,6 +66,7 @@ window.onload = function(){
   console.log(localStorage);
   display.displayProjects(projectArray);
   document.getElementById('proj-0').classList.add('project-active');
+  display.displayTodos(projectArray[0].title, projectArray)
 }();
 
 document.querySelector('.new-list').addEventListener('click', () => {
@@ -99,7 +100,6 @@ document.getElementById('btn-create__project').addEventListener('click', () => {
 
 document.querySelector('.project').addEventListener('click', (event) => {
   event.preventDefault();
-  console.log(event.target.id);
   if (event.target.id === 'btn-cancel__project') {
     display.deleteProjectForm();
   } else if (event.target.id === 'btn-submit__project') {
@@ -116,5 +116,7 @@ document.querySelector('.project-names').addEventListener('click', (event) => {
   if (/^proj-/.test(event.target.id)) {
     document.querySelector('.project-active').classList.remove('project-active');
     document.getElementById(event.target.id).classList.add('project-active');
+    var projIndex = event.target.id[event.target.id.length - 1];
+    display.displayTodos(projectArray[projIndex].title, projectArray);
   }
 });

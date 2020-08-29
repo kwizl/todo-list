@@ -66,14 +66,28 @@ const Display = () => {
   
   // 
 
+  const deleteTodosDisplayed = () => {
+    document.querySelector('.project-list__content').innerHTML = '';
+  }
+
   const displayProjects = (listOfProjects) => {
     var divNames = document.querySelector('.project-names');
-    console.log(listOfProjects);
-
     listOfProjects.forEach( function(current, index) {
-      console.log(current.title);
       const newHTML = `<div id="proj-${index}" class="project-box h3">${current.title}</div>`;
       divNames.insertAdjacentHTML('beforeend', newHTML);
+    });
+  };
+
+  const displayTodos = (projName, listOfProjects) => {
+    deleteTodosDisplayed();
+    var divList = document.querySelector('.project-list__content');
+    listOfProjects.forEach( function(currentProject, prjIndex) {
+      if (currentProject.title === projName) {
+        currentProject.todos.forEach( function(currentTodo, todoIndex) {
+          const newHTML = `<div id="prj-${prjIndex}-todo-${todoIndex}" class="project-list__title">Todo Title: ${currentTodo.title}<br>Todo Description: ${currentTodo.description}<br>Todo DueDate: ${currentTodo.dueDate}<br>Todo Priority: ${currentTodo.priority}<br></div> `;
+          divList.insertAdjacentHTML('beforeend', newHTML);
+        });
+      };
     });
   };
 
@@ -85,6 +99,7 @@ const Display = () => {
     projectList,
     optionProject,
     displayProjects,
+    displayTodos,
   };
 
   //
