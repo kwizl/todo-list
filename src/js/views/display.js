@@ -44,7 +44,7 @@ const Display = () => {
       </select><br>
       <input type="text" id="title" class="task-form-field" placeholder="Title"><br/>
       <textarea type="text" id="desc" class="task-form-field" placeholder="Description"></textarea><br/>
-      <input type="text" id="date" class="task-form-field" placeholder="dueDate"><br/>
+      <input type="date" id="date" class="date task-form-field" placeholder="dueDate"><br/>
       <select name="Priority" id="priority" class="task-form-field" >
         <option value="Low">Low</option>
         <option value="Medium">Medium</option>

@@ -1,6 +1,10 @@
-import ToDoItem from './modules/toDoItem';
 import { Project } from './modules/project';
 import { Display } from './views/display';
+
+// const datefns = require('date-fns/sub_days');
+// const now = new Date();
+// console.log(now);
+// console.log(datefns.addDays);
 
 const projectArray = [];
 const display = Display();
