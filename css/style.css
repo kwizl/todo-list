@@ -171,6 +171,10 @@ header > p {
   margin-left: calc((80% - 300px) /2);
 }
 
+.title-name, .project-icons > i {
+  cursor: pointer;
+}
+
 .project-list {
   background-color: white;
   width: 300px;
@@ -191,7 +195,7 @@ header > p {
 }
 
 .project-active {
-  background-color: rgb(0, 255, 0);
+  color: #cb6578;
 }
 
 .h3 {
