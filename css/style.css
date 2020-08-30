@@ -201,3 +201,11 @@ header > p {
 .h3 {
   font-size: 18px;
 }
+
+.todo-list__icon {
+  padding-top: 15px;
+}
+
+i.todo-icons.fa.fa-pencil-square-o, i.todo-icons.fa.fa-trash-o {
+  color: black;
+}
