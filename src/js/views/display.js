@@ -63,31 +63,41 @@ const Display = () => {
     const formList = document.getElementById('form-list');
     formList.parentNode.removeChild(formList);
   };
-  
-  // 
 
   const deleteTodosDisplayed = () => {
     document.querySelector('.project-list__content').innerHTML = '';
-  }
+  };
 
   const displayProjects = (listOfProjects) => {
-    var divNames = document.querySelector('.project-names');
-    listOfProjects.forEach( function(current, index) {
-      const newHTML = `<div id="proj-${index}" class="project-box h3">${current.title}</div>`;
-      divNames.insertAdjacentHTML('beforeend', newHTML);
+    const divNames = document.querySelector('.project-names');
+    listOfProjects.forEach((current, index) => {
+      const element = `<div class="div-item">
+        <div class="list-item"><p id="proj-${index}" class="title-name">${current.title}</p></div>
+        <div class="list-icon">
+          <span class="project-icons">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </span>
+          <span class="project-icons">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>`;
+      divNames.insertAdjacentHTML('beforeend', element);
     });
   };
 
   const displayTodos = (projName, listOfProjects) => {
     deleteTodosDisplayed();
-    var divList = document.querySelector('.project-list__content');
-    listOfProjects.forEach( function(currentProject, prjIndex) {
+    const divList = document.querySelector('.project-list__content');
+    listOfProjects.forEach((currentProject, prjIndex) => {
       if (currentProject.title === projName) {
-        currentProject.todos.forEach( function(currentTodo, todoIndex) {
-          const newHTML = `<div id="prj-${prjIndex}-todo-${todoIndex}" class="project-list__title">Todo Title: ${currentTodo.title}<br>Todo Description: ${currentTodo.description}<br>Todo DueDate: ${currentTodo.dueDate}<br>Todo Priority: ${currentTodo.priority}<br></div> `;
+        currentProject.todos.forEach((currentTodo, todoIndex) => {
+          const newHTML = `<div id="prj-${prjIndex}-todo-${todoIndex}" class="project-list__title">
+          Todo Title: ${currentTodo.title}<br>Todo Description: ${currentTodo.description}
+          <br>Todo DueDate: ${currentTodo.dueDate}<br>Todo Priority: ${currentTodo.priority}<br></div> `;
           divList.insertAdjacentHTML('beforeend', newHTML);
         });
-      };
+      }
     });
   };
 
@@ -101,8 +111,6 @@ const Display = () => {
     displayProjects,
     displayTodos,
   };
-
-  //
 };
 
 // eslint-disable-next-line import/prefer-default-export

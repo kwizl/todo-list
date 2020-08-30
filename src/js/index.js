@@ -4,70 +4,70 @@ import { Display } from './views/display';
 
 const projectArray = [];
 const display = Display();
-var defaultProject = Project('General');
+const defaultProject = Project('General');
 
 function populateArray() {
   const test = JSON.parse(localStorage.getItem('project'));
   projectArray.splice(0, projectArray.length);
-  test.forEach(function(current) {
+  test.forEach((current) => {
     projectArray.push(current);
   });
-};
+}
 
 function populate(projName, todoAdding) {
   const test = JSON.parse(localStorage.getItem('project'));
   projectArray.splice(0, projectArray.length);
-  test.forEach(function(current) {
+  test.forEach((current) => {
     if (current.title !== projName) {
       projectArray.push(current);
     } else {
       current.todos.push(todoAdding);
       projectArray.push(current);
-    };
+    }
   });
   localStorage.setItem('project', JSON.stringify(test));
-};
+}
 
 function deleteProject(projName) {
   const backup = JSON.parse(localStorage.getItem('project'));
   projectArray.splice(0, projectArray.length);
-  backup.forEach(function(current) {
-    if (current.title !== projName){
+  backup.forEach((current) => {
+    if (current.title !== projName) {
       projectArray.push(current);
-    };
+    }
   });
-};
+}
 
 function deleteTodo(projName, todoName) {
   const backup = JSON.parse(localStorage.getItem('project'));
   projectArray.splice(0, projectArray.length);
-  backup.forEach(function(currentProject) {
+  backup.forEach((currentProject) => {
     if (currentProject.title === projName) {
       const aux = Project(projName);
-      currentProject.todos.forEach(function(currentTodo) {
+      currentProject.todos.forEach((currentTodo) => {
         if (currentTodo.title !== todoName) {
           aux.todos.push(currentTodo);
-        };
+        }
       });
       projectArray.push(aux);
     } else {
       projectArray.push(currentProject);
-    };
+    }
   });
 }
 
-window.onload = function(){
+window.onload = () => {
   if (localStorage.length === 0) {
     projectArray.push(defaultProject);
   } else {
     populateArray();
   }
-  localStorage.setItem('project', JSON.stringify(projectArray))
+  localStorage.setItem('project', JSON.stringify(projectArray));
   console.log(localStorage);
   display.displayProjects(projectArray);
   document.getElementById('proj-0').classList.add('project-active');
-  display.displayTodos(projectArray[0].title, projectArray)
-}();
+  display.displayTodos(projectArray[0].title, projectArray);
+};
 
 document.querySelector('.new-list').addEventListener('click', () => {
   if (!document.getElementById('form-list')) {
@@ -89,7 +89,7 @@ document.querySelector('.list').addEventListener('click', (event) => {
     };
     populate(whichProject, todoItem);
     display.deleteListForm();
-  };
+  }
 });
 
 document.getElementById('btn-create__project').addEventListener('click', () => {
@@ -103,7 +103,7 @@ document.querySelector('.project').addEventListener('click', (event) => {
   if (event.target.id === 'btn-cancel__project') {
     display.deleteProjectForm();
   } else if (event.target.id === 'btn-submit__project') {
-    let projectTitle = document.getElementById('proj-title').value;
+    const projectTitle = document.getElementById('proj-title').value;
     const newProject = Project(projectTitle);
     projectArray.push(newProject);
     localStorage.setItem('project', JSON.stringify(projectArray));
@@ -116,7 +116,7 @@ document.querySelector('.project-names').addEventListener('click', (event) => {
   if (/^proj-/.test(event.target.id)) {
     document.querySelector('.project-active').classList.remove('project-active');
     document.getElementById(event.target.id).classList.add('project-active');
-    var projIndex = event.target.id[event.target.id.length - 1];
+    const projIndex = event.target.id[event.target.id.length - 1];
     display.displayTodos(projectArray[projIndex].title, projectArray);
   }
 });
