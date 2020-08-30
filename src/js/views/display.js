@@ -71,7 +71,7 @@ const Display = () => {
   const displayProjects = (listOfProjects) => {
     const divNames = document.querySelector('.project-names');
     listOfProjects.forEach((current, index) => {
-      const element = `<div class="div-item">
+      const newHTML = `<div class="div-item">
         <div class="list-item"><p id="proj-${index}" class="title-name">${current.title}</p></div>
         <div class="list-icon">
           <span class="project-icons">
@@ -82,7 +82,7 @@ const Display = () => {
           </span>
         </div>
       </div>`;
-      divNames.insertAdjacentHTML('beforeend', element);
+      divNames.insertAdjacentHTML('beforeend', newHTML);
     });
   };
 
@@ -92,10 +92,22 @@ const Display = () => {
     listOfProjects.forEach((currentProject, prjIndex) => {
       if (currentProject.title === projName) {
         currentProject.todos.forEach((currentTodo, todoIndex) => {
-          const newHTML = `<div id="prj-${prjIndex}-todo-${todoIndex}" class="project-list__title">
+          const el = `<div id="prj-${prjIndex}-todo-${todoIndex}" class="project-list">
+            <p>Title: &nbsp; &nbsp; &nbsp;${currentTodo.title}</p>
+            <p>Date:  &nbsp; &nbsp; &nbsp;${currentTodo.dueDate}</p>
+              <div class="todo-list__icon">
+                <span class="project-icons">
+                  <i class="todo-icons fa fa-pencil-square-o" aria-hidden="true"></i>
+                </span>
+                <span class="project-icons">
+                  <i class="todo-icons fa fa-trash-o" aria-hidden="true"></i>
+                </span>
+              </div>
+            </div>`;
+          /* const newHTML = `<div id="prj-${prjIndex}-todo-${todoIndex}" class="project-list__title">
           Todo Title: ${currentTodo.title}<br>Todo Description: ${currentTodo.description}
-          <br>Todo DueDate: ${currentTodo.dueDate}<br>Todo Priority: ${currentTodo.priority}<br></div> `;
-          divList.insertAdjacentHTML('beforeend', newHTML);
+          <br>Todo DueDate: ${currentTodo.dueDate}<br>Todo Priority: ${currentTodo.priority}<br></div> `; */
+          divList.insertAdjacentHTML('beforeend', el);
         });
       }
     });
