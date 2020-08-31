@@ -41,11 +41,10 @@ function deleteProject(projName) {
     }
   });
   localStorage.setItem('project', JSON.stringify(projectArray));
-  display.displayProjects(projectArray);
+  init();
 }
 
 function deleteTodo(projName, todoName) {
-  console.log(`${projName}, ${todoName}`);
   const backup = JSON.parse(localStorage.getItem('project'));
   projectArray.splice(0, projectArray.length);
   backup.forEach((currentProject) => {
@@ -62,10 +61,11 @@ function deleteTodo(projName, todoName) {
     }
   });
   localStorage.setItem('project', JSON.stringify(projectArray));
+  display.displayTodos(projName, projectArray);
 }
 
-window.onload = () => {
-  if (localStorage.length === 0) {
+function init() {
+  if (localStorage.length === 0 || localStorage.getItem('project') === "[]") {
     projectArray.push(defaultProject);
   } else {
     populateArray();
@@ -77,6 +77,10 @@ window.onload = () => {
   display.displayTodos(projectArray[0].title, projectArray);
 };
 
+window.onload = () => {
+  init();
+};
+
 
 function blur() {
   document.querySelector('.content').style.opacity = '0';
@@ -84,6 +88,8 @@ function blur() {
 
 function unblur() {
   document.querySelector('.content').style.opacity = '1';
+  // display.displayProjects(projectArray);
+  // display.displayTodos(projectArray);
 }
 
 document.querySelector('.new-list').addEventListener('click', () => {
@@ -109,6 +115,7 @@ document.querySelector('.list-form').addEventListener('click', (event) => {
     populate(whichProject, todoItem);
     display.deleteListForm();
     unblur();
+    init();
   }
 });
 
@@ -132,6 +139,7 @@ document.querySelector('.forms').addEventListener('click', (event) => {
     display.deleteProjectForm();
     populateArray();
     unblur();
+    init();
   }
 });
 
@@ -145,7 +153,6 @@ document.querySelector('.project-names').addEventListener('click', (event) => {
 });
 
 document.querySelector('.project-list__content').addEventListener('click', (event) => {
-  // console.log(event.target.parentNode.parentNode.parentNode);
   if (/trash/.test(event.target.classList)) {
     var splitID, projID, todoID;
     splitID = event.target.parentNode.parentNode.parentNode.id.split('-');
@@ -163,3 +170,4 @@ document.querySelector('.project-names').addEventListener('click', (event) => {
     deleteProject(projectArray[projID].title);
   };
 });
+
