@@ -64,11 +64,16 @@ const Display = () => {
     formList.parentNode.removeChild(formList);
   };
 
+  const deleteProjectsDisplayed = () => {
+    document.querySelector('.project-names').innerHTML = '';
+  };
+
   const deleteTodosDisplayed = () => {
     document.querySelector('.project-list__content').innerHTML = '';
   };
 
   const displayProjects = (listOfProjects) => {
+    deleteProjectsDisplayed();
     const divNames = document.querySelector('.project-names');
     listOfProjects.forEach((current, index) => {
       const newHTML = `<div class="div-item">

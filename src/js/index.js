@@ -40,6 +40,8 @@ function deleteProject(projName) {
       projectArray.push(current);
     }
   });
+  localStorage.setItem('project', JSON.stringify(projectArray));
+  display.displayProjects(projectArray);
 }
 
 function deleteTodo(projName, todoName) {
@@ -153,8 +155,11 @@ document.querySelector('.project-list__content').addEventListener('click', (even
   };
 });
 
-document.querySelector('project-names').addEventListener('click', (event) => {
+document.querySelector('.project-names').addEventListener('click', (event) => {
   if (/trash/.test(event.target.classList)) {
-    
+    var splitID, projID;
+    splitID = event.target.id.split('-');
+    projID = splitID[2];
+    deleteProject(projectArray[projID].title);
   };
 });
