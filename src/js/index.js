@@ -25,7 +25,19 @@ function populate(projName, todoAdding) {
     if (current.title !== projName) {
       projectArray.push(current);
     } else {
-      current.todos.push(todoAdding);
+      let flag = true;
+      if (current.todos.length !== 0) {
+        current.todos.forEach( (currentTodo, todoIndex) => {
+          if (currentTodo.title === todoAdding.title) {
+            current.todos[todoIndex] = todoAdding;
+            flag = false;
+          }
+        })
+      }
+
+      if (flag) {
+        current.todos.push(todoAdding);
+      }
       projectArray.push(current);
     }
   });
@@ -171,3 +183,17 @@ document.querySelector('.project-names').addEventListener('click', (event) => {
   };
 });
 
+document.querySelector('.project-list__content').addEventListener('click', (event) => {
+  if (/pencil/.test(event.target.classList)) {
+    var splitID, projID, todoID;
+    splitID = event.target.parentNode.parentNode.parentNode.id.split('-');
+    projID = splitID[1];
+    todoID = splitID[3];
+    display.createListForm(projectArray);
+    blur();
+    document.getElementById('title').value = projectArray[projID].todos[todoID].title;
+    document.getElementById('desc').value = projectArray[projID].todos[todoID].description;
+    document.getElementById('date').value = projectArray[projID].todos[todoID].dueDate;
+    document.getElementById('priority').value = projectArray[projID].todos[todoID].priority;
+  }
+});
