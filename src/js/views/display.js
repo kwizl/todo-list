@@ -1,6 +1,6 @@
 const Display = () => {
   const createProjectForm = () => {
-    const projectForm = document.querySelector('.project');
+    const projectForm = document.querySelector('.forms');
     const newHTML = `<form id="form-project" class="project-form active">
     <p>Create a Project</p>
     <input type="text" id="proj-title" class="task-form-field" placeholder="Title"><br/>
@@ -36,7 +36,7 @@ const Display = () => {
 
   const createListForm = (listOfProjects) => {
     const listOfOptions = optionProject(listOfProjects);
-    const listForm = document.querySelector('.list-content');
+    const listForm = document.querySelector('.list-form');
     const rawHTML = `<form id="form-list" class="project-form active">
       <p>Add a Task to a Project</p>
       <select name="Project-to-add" id="project-to-add" class="task-form-field">

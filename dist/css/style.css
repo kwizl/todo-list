@@ -92,6 +92,7 @@ header > p {
   position: absolute;
   top: calc((100vh - 520px) / 2);
   right: calc((100vw - 330px) / 2);
+  z-index: 15;
 }
 
 .project-names {

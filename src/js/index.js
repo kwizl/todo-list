@@ -73,16 +73,27 @@ window.onload = () => {
   display.displayTodos(projectArray[0].title, projectArray);
 };
 
+
+function blur() {
+  document.querySelector('.content').style.opacity = '0';
+}
+
+function unblur() {
+  document.querySelector('.content').style.opacity = '1';
+}
+
 document.querySelector('.new-list').addEventListener('click', () => {
   if (!document.getElementById('form-list')) {
     display.createListForm(projectArray);
+    blur();
   }
 });
 
-document.querySelector('.list').addEventListener('click', (event) => {
+document.querySelector('.list-form').addEventListener('click', (event) => {
   event.preventDefault();
   if (event.target.id === 'btn-cancel__list') {
     display.deleteListForm();
+    unblur();
   } else if (event.target.id === 'btn-submit__list') {
     const whichProject = document.getElementById('project-to-add').value;
     const todoItem = {
@@ -93,19 +104,22 @@ document.querySelector('.list').addEventListener('click', (event) => {
     };
     populate(whichProject, todoItem);
     display.deleteListForm();
+    unblur();
   }
 });
 
 document.getElementById('btn-create__project').addEventListener('click', () => {
   if (!document.getElementById('form-project')) {
     display.createProjectForm();
+    blur();
   }
 });
 
-document.querySelector('.project').addEventListener('click', (event) => {
+document.querySelector('.forms').addEventListener('click', (event) => {
   event.preventDefault();
   if (event.target.id === 'btn-cancel__project') {
     display.deleteProjectForm();
+    unblur();
   } else if (event.target.id === 'btn-submit__project') {
     const projectTitle = document.getElementById('proj-title').value;
     const newProject = Project(projectTitle);
@@ -113,6 +127,7 @@ document.querySelector('.project').addEventListener('click', (event) => {
     localStorage.setItem('project', JSON.stringify(projectArray));
     display.deleteProjectForm();
     populateArray();
+    unblur();
   }
 });
 
