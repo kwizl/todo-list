@@ -43,6 +43,7 @@ function deleteProject(projName) {
 }
 
 function deleteTodo(projName, todoName) {
+  console.log(`${projName}, ${todoName}`);
   const backup = JSON.parse(localStorage.getItem('project'));
   projectArray.splice(0, projectArray.length);
   backup.forEach((currentProject) => {
@@ -58,6 +59,7 @@ function deleteTodo(projName, todoName) {
       projectArray.push(currentProject);
     }
   });
+  localStorage.setItem('project', JSON.stringify(projectArray));
 }
 
 window.onload = () => {
@@ -138,4 +140,21 @@ document.querySelector('.project-names').addEventListener('click', (event) => {
     const projIndex = event.target.id[event.target.id.length - 1];
     display.displayTodos(projectArray[projIndex].title, projectArray);
   }
+});
+
+document.querySelector('.project-list__content').addEventListener('click', (event) => {
+  // console.log(event.target.parentNode.parentNode.parentNode);
+  if (/trash/.test(event.target.classList)) {
+    var splitID, projID, todoID;
+    splitID = event.target.parentNode.parentNode.parentNode.id.split('-');
+    projID = splitID[1];
+    todoID = splitID[3];
+    deleteTodo(projectArray[projID].title, projectArray[projID].todos[todoID].title);
+  };
+});
+
+document.querySelector('project-names').addEventListener('click', (event) => {
+  if (/trash/.test(event.target.classList)) {
+    
+  };
 });

@@ -75,10 +75,10 @@ const Display = () => {
         <div class="list-item"><p id="proj-${index}" class="title-name">${current.title}</p></div>
         <div class="list-icon">
           <span class="project-icons">
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i id="edit-proj-${index}" class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </span>
           <span class="project-icons">
-            <i class="fa fa-trash-o" aria-hidden="true"></i>
+            <i id="delete-proj-${index}" class="fa fa-trash-o" aria-hidden="true"></i>
           </span>
         </div>
       </div>`;
