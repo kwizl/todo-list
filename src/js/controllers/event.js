@@ -79,13 +79,13 @@ const Events = () => {
     });
   };
 
-  const deleteToDos = (projectArray) => {
+  const deleteToDos = (array) => {
     document.querySelector('.project-list__content').addEventListener('click', (event) => {
       if (/trash/.test(event.target.classList)) {
         const splitID = event.target.parentNode.parentNode.parentNode.id.split('-');
         const projID = splitID[1];
         const todoID = splitID[3];
-        operation.deleteTodo(projectArray[projID].title, projectArray[projID].todos[todoID].title, projectArray);
+        operation.deleteTodo(array[projID].title, array[projID].todos[todoID].title, array);
       }
     });
   };
@@ -152,11 +152,11 @@ const Events = () => {
         const todoIndex = splitID[1];
         const aux = JSON.parse(localStorage.getItem('project'));
 
-        aux[projIndex].todos[todoIndex].title = document.getElementById('title').value,
-        aux[projIndex].todos[todoIndex].description = document.getElementById('desc').value,
-        aux[projIndex].todos[todoIndex].dueDate = document.getElementById('date').value,
-        aux[projIndex].todos[todoIndex].priority = document.getElementById('priority').value,
-       
+        aux[projIndex].todos[todoIndex].title = document.getElementById('title').value;
+        aux[projIndex].todos[todoIndex].description = document.getElementById('desc').value;
+        aux[projIndex].todos[todoIndex].dueDate = document.getElementById('date').value;
+        aux[projIndex].todos[todoIndex].priority = document.getElementById('priority').value;
+
         localStorage.setItem('project', JSON.stringify(aux));
         display.deleteListForm();
         style.unblur();

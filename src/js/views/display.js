@@ -74,7 +74,7 @@ const Display = () => {
         <button id="btn-update__list" class="form-btn__submit">Update</button>
       </div>
     </form>`;
-    listForm.insertAdjacentHTML('beforeend', rawHTML)
+    listForm.insertAdjacentHTML('beforeend', rawHTML);
   };
 
   const updateProject = (projIndex) => {
@@ -142,8 +142,8 @@ const Display = () => {
               </div>`;
             divList.insertAdjacentHTML('beforeend', el);
           });
-        };
-      };
+        }
+      }
     });
   };
 
