@@ -1,5 +1,3 @@
-import { Display } from './views/display';
-import { Style } from './views/displayStyle';
 import { Events } from './controllers/event';
 import { Operations } from './controllers/operations';
 

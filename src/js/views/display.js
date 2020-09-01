@@ -25,7 +25,6 @@ const Display = () => {
     formProject.parentNode.removeChild(formProject);
   };
 
-
   const optionProject = (array) => {
     let html = '';
     array.forEach((current) => {
@@ -78,7 +77,7 @@ const Display = () => {
     listForm.insertAdjacentHTML('beforeend', rawHTML)
   };
 
-  const updateProject = (listOfProjects, projIndex) => {
+  const updateProject = (projIndex) => {
     const projectForm = document.querySelector('.forms');
     const newHTML = `<form id="form-project" class="project-form active">
     <p id="edit-project" class="${projIndex}">Edit Project</p>
@@ -143,8 +142,8 @@ const Display = () => {
               </div>`;
             divList.insertAdjacentHTML('beforeend', el);
           });
-        }
-      }
+        };
+      };
     });
   };
 
