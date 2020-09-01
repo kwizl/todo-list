@@ -117,7 +117,6 @@ const Events = () => {
         event.preventDefault();
         const projIndex = document.getElementById('edit-project').classList.value;
         const aux = JSON.parse(localStorage.getItem('project'));
-        
         aux[projIndex].title = document.getElementById('proj-title').value;
         localStorage.setItem('project', JSON.stringify(aux));
         display.deleteProjectForm();
