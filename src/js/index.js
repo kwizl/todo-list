@@ -5,8 +5,6 @@ import { Operations } from './controllers/operations';
 
 const event = Events();
 const operation = Operations();
-const display = Display();
-const style = Style();
 
 const projectArray = [];
 
@@ -17,7 +15,8 @@ window.onload = () => {
 event.formList(projectArray);
 event.formProject();
 event.createProject(projectArray);
-event.deleteProject(projectArray);
+event.deleteToDos(projectArray);
 event.projectFormComponent(projectArray);
+event.projectNames(projectArray);
 event.listContent(projectArray);
 event.listFormComponent(projectArray);

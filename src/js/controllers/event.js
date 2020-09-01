@@ -8,6 +8,38 @@ const Events = () => {
   const style = Style();
   const operation = Operations();
 
+
+  const formList = (projectArray) => {
+    document.querySelector('.new-list').addEventListener('click', () => {
+      if (!document.getElementById('form-list')) {
+        display.createListForm(projectArray);
+        style.blur();
+      }
+    });
+  };
+
+  const listFormComponent = (projectArray) => {
+    document.querySelector('.list-form').addEventListener('click', (event) => {
+      event.preventDefault();
+      if (event.target.id === 'btn-cancel__list') {
+        display.deleteListForm();
+        style.unblur();
+      } else if (event.target.id === 'btn-submit__list') {
+        const whichProject = document.getElementById('project-to-add').value;
+        const todoItem = {
+          title: document.getElementById('title').value,
+          description: document.getElementById('desc').value,
+          dueDate: document.getElementById('date').value,
+          priority: document.getElementById('priority').value,
+        };
+        operation.populate(whichProject, todoItem, projectArray);
+        display.deleteListForm();
+        style.unblur();
+        operation.init(projectArray);
+      }
+    });
+  };
+
   const formProject = () => {
     document.getElementById('btn-create__project').addEventListener('click', () => {
       if (!document.getElementById('form-project')) {
@@ -17,11 +49,21 @@ const Events = () => {
     });
   };
 
-  const formList = (projectArray) => {
-    document.querySelector('.new-list').addEventListener('click', () => {
-      if (!document.getElementById('form-list')) {
-        display.createListForm(projectArray);
-        style.blur();
+  const projectFormComponent = (projectArray) => {
+    document.querySelector('.forms').addEventListener('click', (event) => {
+      event.preventDefault();
+      if (event.target.id === 'btn-cancel__project') {
+        display.deleteProjectForm();
+        style.unblur();
+      } else if (event.target.id === 'btn-submit__project') {
+        const projectTitle = document.getElementById('proj-title').value;
+        const newProject = Project(projectTitle);
+        projectArray.push(newProject);
+        localStorage.setItem('project', JSON.stringify(projectArray));
+        display.deleteProjectForm();
+        operation.populateArray(projectArray);
+        style.unblur();
+        operation.init(projectArray);
       }
     });
   };
@@ -48,43 +90,12 @@ const Events = () => {
     });
   };
 
-  const projectFormComponent = (projectArray) => {
-    document.querySelector('.forms').addEventListener('click', (event) => {
-      event.preventDefault();
-      if (event.target.id === 'btn-cancel__project') {
-        display.deleteProjectForm();
-        style.unblur();
-      } else if (event.target.id === 'btn-submit__project') {
-        const projectTitle = document.getElementById('proj-title').value;
-        const newProject = Project(projectTitle);
-        projectArray.push(newProject);
-        localStorage.setItem('project', JSON.stringify(projectArray));
-        display.deleteProjectForm();
-        operation.populateArray(projectArray);
-        style.unblur();
-        operation.init(projectArray);
-      }
-    });
-  };
-
-  const listFormComponent = (projectArray) => {
-    document.querySelector('.list-form').addEventListener('click', (event) => {
-      event.preventDefault();
-      if (event.target.id === 'btn-cancel__list') {
-        display.deleteListForm();
-        style.unblur();
-      } else if (event.target.id === 'btn-submit__list') {
-        const whichProject = document.getElementById('project-to-add').value;
-        const todoItem = {
-          title: document.getElementById('title').value,
-          description: document.getElementById('desc').value,
-          dueDate: document.getElementById('date').value,
-          priority: document.getElementById('priority').value,
-        };
-        operation.populate(whichProject, todoItem, projectArray);
-        display.deleteListForm();
-        style.unblur();
-        operation.init(projectArray);
+  const projectNames = (projectArray) => {
+    document.querySelector('.project-names').addEventListener('click', (event) => {
+      if (/trash/.test(event.target.classList)) {
+        const splitID = event.target.id.split('-');
+        const projID = splitID[2];
+        operation.deleteProject(projectArray[projID].title, projectArray);
       }
     });
   };
@@ -113,6 +124,7 @@ const Events = () => {
     formList,
     projectFormComponent,
     listFormComponent,
+    projectNames,
     listContent,
   };
 };
