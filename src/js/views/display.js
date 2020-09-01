@@ -59,6 +59,37 @@ const Display = () => {
     listForm.insertAdjacentHTML('beforeend', newHTML);
   };
 
+  const updateList = (projIndex, todoIndex) => {
+    const listForm = document.querySelector('.list-form');
+    const rawHTML = `<form id="form-list" class="project-form active">
+      <p id="editing" class="${projIndex}-${todoIndex}">Edit Task</p>
+      <input type="text" id="title" class="task-form-field" placeholder="Title"><br/>
+      <textarea type="text" id="desc" class="task-form-field" placeholder="Description"></textarea><br/>
+      <input type="date" id="date" class="date task-form-field" placeholder="dueDate"><br/>
+      <select name="Priority" id="priority" class="task-form-field" >
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+      <div class="project-submit" >
+        <button id="btn-update__list" class="form-btn__submit">Update</button>
+      </div>
+    </form>`;
+    listForm.insertAdjacentHTML('beforeend', rawHTML)
+  };
+
+  const updateProject = (listOfProjects, projIndex) => {
+    const projectForm = document.querySelector('.forms');
+    const newHTML = `<form id="form-project" class="project-form active">
+    <p id="edit-project" class="${projIndex}">Create a Project</p>
+    <input type="text" id="proj-title" class="task-form-field" placeholder="Title"><br/>
+    <div class="project-submit">
+      <button id="btn-update__project" class="form-btn__submit">Update</button>
+    </div>
+    </form>`;
+    projectForm.insertAdjacentHTML('beforeend', newHTML);
+  };
+
   const deleteListForm = () => {
     const formList = document.getElementById('form-list');
     formList.parentNode.removeChild(formList);
@@ -121,8 +152,10 @@ const Display = () => {
     createProjectForm,
     deleteProjectForm,
     createListForm,
+    updateList,
     deleteListForm,
     projectList,
+    updateProject,
     optionProject,
     displayProjects,
     displayTodos,

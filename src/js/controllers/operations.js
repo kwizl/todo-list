@@ -32,21 +32,9 @@ const Operations = () => {
       if (current.title !== projName) {
         projectArray.push(current);
       } else {
-        let flag = true;
-        if (current.todos.length !== 0) {
-          current.todos.forEach((currentTodo, todoIndex) => {
-            if (currentTodo.title === todoAdding.title) {
-              current.todos[todoIndex] = todoAdding;
-              flag = false;
-            }
-          });
-        }
-
-        if (flag) {
-          current.todos.push(todoAdding);
-        }
-        projectArray.push(current);
+        current.todos.push(todoAdding);
       }
+      projectArray.push(current);
     });
     localStorage.setItem('project', JSON.stringify(test));
   };

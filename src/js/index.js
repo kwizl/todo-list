@@ -14,9 +14,10 @@ window.onload = () => {
 
 event.formList(projectArray);
 event.formProject();
-event.createProject(projectArray);
+event.toggleProject(projectArray);
 event.deleteToDos(projectArray);
 event.projectFormComponent(projectArray);
 event.projectNames(projectArray);
 event.listContent(projectArray);
 event.listFormComponent(projectArray);
+event.listUpdate(projectArray);
