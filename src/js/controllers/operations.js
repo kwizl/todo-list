@@ -17,7 +17,7 @@ const Operations = () => {
     if (localStorage.length === 0 || localStorage.getItem('project') === '[]') {
       projectArray.push(defaultProject);
     } else {
-      populateArray();
+      populateArray(projectArray);
     }
     localStorage.setItem('project', JSON.stringify(projectArray));
     display.displayProjects(projectArray);
@@ -88,6 +88,7 @@ const Operations = () => {
     populate,
     deleteTodo,
     deleteProject,
+    populateArray,
   };
 };
 
