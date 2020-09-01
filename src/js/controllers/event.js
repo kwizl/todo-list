@@ -104,7 +104,7 @@ const Events = () => {
     document.querySelector('.project-names').addEventListener('click', (event) => {
       if (/pencil/.test(event.target.classList)) {
         const splitID = event.target.id.split('-')[2];
-        display.updateProject(projectArray, splitID);
+        display.updateProject(splitID);
         style.blur();
         document.getElementById('proj-title').value = projectArray[splitID].title;
       }
@@ -117,7 +117,7 @@ const Events = () => {
         event.preventDefault();
         const projIndex = document.getElementById('edit-project').classList.value;
         const aux = JSON.parse(localStorage.getItem('project'));
-
+        
         aux[projIndex].title = document.getElementById('proj-title').value;
         localStorage.setItem('project', JSON.stringify(aux));
         display.deleteProjectForm();
