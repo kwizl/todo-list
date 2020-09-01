@@ -1,14 +1,12 @@
 import { Project } from './modules/project';
 import { Display } from './views/display';
+import { Style } from './views/displayStyle';
 
-// const datefns = require('date-fns/sub_days');
-// const now = new Date();
-// console.log(now);
-// console.log(datefns.addDays);
+const display = Display();
+const style = Style();
+const defaultProject = Project('General');
 
 const projectArray = [];
-const display = Display();
-const defaultProject = Project('General');
 
 function populateArray() {
   const test = JSON.parse(localStorage.getItem('project'));
@@ -27,12 +25,12 @@ function populate(projName, todoAdding) {
     } else {
       let flag = true;
       if (current.todos.length !== 0) {
-        current.todos.forEach( (currentTodo, todoIndex) => {
+        current.todos.forEach((currentTodo, todoIndex) => {
           if (currentTodo.title === todoAdding.title) {
             current.todos[todoIndex] = todoAdding;
             flag = false;
           }
-        })
+        });
       }
 
       if (flag) {
@@ -42,6 +40,19 @@ function populate(projName, todoAdding) {
     }
   });
   localStorage.setItem('project', JSON.stringify(test));
+}
+
+function init() {
+  if (localStorage.length === 0 || localStorage.getItem('project') === '[]') {
+    projectArray.push(defaultProject);
+  } else {
+    populateArray();
+  }
+  localStorage.setItem('project', JSON.stringify(projectArray));
+  console.log(localStorage);
+  display.displayProjects(projectArray);
+  document.getElementById('proj-0').classList.add('project-active');
+  display.displayTodos(projectArray[0].title, projectArray);
 }
 
 function deleteProject(projName) {
@@ -76,38 +87,14 @@ function deleteTodo(projName, todoName) {
   display.displayTodos(projName, projectArray);
 }
 
-function init() {
-  if (localStorage.length === 0 || localStorage.getItem('project') === "[]") {
-    projectArray.push(defaultProject);
-  } else {
-    populateArray();
-  }
-  localStorage.setItem('project', JSON.stringify(projectArray));
-  console.log(localStorage);
-  display.displayProjects(projectArray);
-  document.getElementById('proj-0').classList.add('project-active');
-  display.displayTodos(projectArray[0].title, projectArray);
-};
-
 window.onload = () => {
   init();
 };
 
-
-function blur() {
-  document.querySelector('.content').style.opacity = '0';
-}
-
-function unblur() {
-  document.querySelector('.content').style.opacity = '1';
-  // display.displayProjects(projectArray);
-  // display.displayTodos(projectArray);
-}
-
 document.querySelector('.new-list').addEventListener('click', () => {
   if (!document.getElementById('form-list')) {
     display.createListForm(projectArray);
-    blur();
+    style.blur();
   }
 });
 
@@ -115,7 +102,7 @@ document.querySelector('.list-form').addEventListener('click', (event) => {
   event.preventDefault();
   if (event.target.id === 'btn-cancel__list') {
     display.deleteListForm();
-    unblur();
+    style.unblur();
   } else if (event.target.id === 'btn-submit__list') {
     const whichProject = document.getElementById('project-to-add').value;
     const todoItem = {
@@ -126,7 +113,7 @@ document.querySelector('.list-form').addEventListener('click', (event) => {
     };
     populate(whichProject, todoItem);
     display.deleteListForm();
-    unblur();
+    style.unblur();
     init();
   }
 });
@@ -134,7 +121,7 @@ document.querySelector('.list-form').addEventListener('click', (event) => {
 document.getElementById('btn-create__project').addEventListener('click', () => {
   if (!document.getElementById('form-project')) {
     display.createProjectForm();
-    blur();
+    style.blur();
   }
 });
 
@@ -142,7 +129,7 @@ document.querySelector('.forms').addEventListener('click', (event) => {
   event.preventDefault();
   if (event.target.id === 'btn-cancel__project') {
     display.deleteProjectForm();
-    unblur();
+    style.unblur();
   } else if (event.target.id === 'btn-submit__project') {
     const projectTitle = document.getElementById('proj-title').value;
     const newProject = Project(projectTitle);
@@ -150,7 +137,7 @@ document.querySelector('.forms').addEventListener('click', (event) => {
     localStorage.setItem('project', JSON.stringify(projectArray));
     display.deleteProjectForm();
     populateArray();
-    unblur();
+    style.unblur();
     init();
   }
 });
@@ -166,31 +153,28 @@ document.querySelector('.project-names').addEventListener('click', (event) => {
 
 document.querySelector('.project-list__content').addEventListener('click', (event) => {
   if (/trash/.test(event.target.classList)) {
-    var splitID, projID, todoID;
-    splitID = event.target.parentNode.parentNode.parentNode.id.split('-');
-    projID = splitID[1];
-    todoID = splitID[3];
+    const splitID = event.target.parentNode.parentNode.parentNode.id.split('-');
+    const projID = splitID[1];
+    const todoID = splitID[3];
     deleteTodo(projectArray[projID].title, projectArray[projID].todos[todoID].title);
-  };
+  }
 });
 
 document.querySelector('.project-names').addEventListener('click', (event) => {
   if (/trash/.test(event.target.classList)) {
-    var splitID, projID;
-    splitID = event.target.id.split('-');
-    projID = splitID[2];
+    const splitID = event.target.id.split('-');
+    const projID = splitID[2];
     deleteProject(projectArray[projID].title);
-  };
+  }
 });
 
 document.querySelector('.project-list__content').addEventListener('click', (event) => {
   if (/pencil/.test(event.target.classList)) {
-    var splitID, projID, todoID;
-    splitID = event.target.parentNode.parentNode.parentNode.id.split('-');
-    projID = splitID[1];
-    todoID = splitID[3];
+    const splitID = event.target.parentNode.parentNode.parentNode.id.split('-');
+    const projID = splitID[1];
+    const todoID = splitID[3];
     display.createListForm(projectArray);
-    blur();
+    style.blur();
     document.getElementById('title').value = projectArray[projID].todos[todoID].title;
     document.getElementById('desc').value = projectArray[projID].todos[todoID].description;
     document.getElementById('date').value = projectArray[projID].todos[todoID].dueDate;

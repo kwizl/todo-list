@@ -112,8 +112,8 @@ const Display = () => {
               </div>`;
             divList.insertAdjacentHTML('beforeend', el);
           });
-        };
-      };
+        }
+      }
     });
   };
 
