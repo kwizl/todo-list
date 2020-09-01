@@ -100,8 +100,31 @@ const Events = () => {
     });
   };
 
-  const projectcontent = (projectArray) => {
-    
+  const projectContent = (projectArray) => {
+    document.querySelector('.project-names').addEventListener('click', (event) => {
+      if (/pencil/.test(event.target.classList)) {
+        const splitID = event.target.id.split('-')[2];
+        display.updateProject(projectArray, splitID);
+        style.blur();
+        document.getElementById('proj-title').value = projectArray[splitID].title;
+      }
+    });
+  };
+
+  const projectUpdate = (listOfProjects) => {
+    document.querySelector('.forms').addEventListener('click', (event) => {
+      if (event.target.id === 'btn-update__project') {
+        event.preventDefault();
+        const projIndex = document.getElementById('edit-project').classList.value;
+        const aux = JSON.parse(localStorage.getItem('project'));
+
+        aux[projIndex].title = document.getElementById('proj-title').value;
+        localStorage.setItem('project', JSON.stringify(aux));
+        display.deleteProjectForm();
+        style.unblur();
+        operation.init(listOfProjects);
+      }
+    });
   };
 
   const listContent = (projectArray) => {
@@ -144,7 +167,7 @@ const Events = () => {
 
   return {
     formProject,
-    createProject,
+    toggleProject,
     deleteToDos,
     formList,
     projectFormComponent,
@@ -152,6 +175,8 @@ const Events = () => {
     projectNames,
     listContent,
     listUpdate,
+    projectContent,
+    projectUpdate,
   };
 };
 

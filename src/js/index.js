@@ -21,3 +21,5 @@ event.projectNames(projectArray);
 event.listContent(projectArray);
 event.listFormComponent(projectArray);
 event.listUpdate(projectArray);
+event.projectContent(projectArray);
+event.projectUpdate(projectArray);

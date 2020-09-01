@@ -81,7 +81,7 @@ const Display = () => {
   const updateProject = (listOfProjects, projIndex) => {
     const projectForm = document.querySelector('.forms');
     const newHTML = `<form id="form-project" class="project-form active">
-    <p id="edit-project" class="${projIndex}">Create a Project</p>
+    <p id="edit-project" class="${projIndex}">Edit Project</p>
     <input type="text" id="proj-title" class="task-form-field" placeholder="Title"><br/>
     <div class="project-submit">
       <button id="btn-update__project" class="form-btn__submit">Update</button>
