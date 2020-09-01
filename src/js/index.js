@@ -1,94 +1,18 @@
 import { Project } from './modules/project';
 import { Display } from './views/display';
 import { Style } from './views/displayStyle';
+import { Events } from './controllers/event';
+import { Operations } from './controllers/operations';
 
 const display = Display();
 const style = Style();
-const defaultProject = Project('General');
+const event = Events();
+const operation = Operations();
 
 const projectArray = [];
 
-function populateArray() {
-  const test = JSON.parse(localStorage.getItem('project'));
-  projectArray.splice(0, projectArray.length);
-  test.forEach((current) => {
-    projectArray.push(current);
-  });
-}
-
-function populate(projName, todoAdding) {
-  const test = JSON.parse(localStorage.getItem('project'));
-  projectArray.splice(0, projectArray.length);
-  test.forEach((current) => {
-    if (current.title !== projName) {
-      projectArray.push(current);
-    } else {
-      let flag = true;
-      if (current.todos.length !== 0) {
-        current.todos.forEach((currentTodo, todoIndex) => {
-          if (currentTodo.title === todoAdding.title) {
-            current.todos[todoIndex] = todoAdding;
-            flag = false;
-          }
-        });
-      }
-
-      if (flag) {
-        current.todos.push(todoAdding);
-      }
-      projectArray.push(current);
-    }
-  });
-  localStorage.setItem('project', JSON.stringify(test));
-}
-
-function init() {
-  if (localStorage.length === 0 || localStorage.getItem('project') === '[]') {
-    projectArray.push(defaultProject);
-  } else {
-    populateArray();
-  }
-  localStorage.setItem('project', JSON.stringify(projectArray));
-  console.log(localStorage);
-  display.displayProjects(projectArray);
-  document.getElementById('proj-0').classList.add('project-active');
-  display.displayTodos(projectArray[0].title, projectArray);
-}
-
-function deleteProject(projName) {
-  const backup = JSON.parse(localStorage.getItem('project'));
-  projectArray.splice(0, projectArray.length);
-  backup.forEach((current) => {
-    if (current.title !== projName) {
-      projectArray.push(current);
-    }
-  });
-  localStorage.setItem('project', JSON.stringify(projectArray));
-  init();
-}
-
-function deleteTodo(projName, todoName) {
-  const backup = JSON.parse(localStorage.getItem('project'));
-  projectArray.splice(0, projectArray.length);
-  backup.forEach((currentProject) => {
-    if (currentProject.title === projName) {
-      const aux = Project(projName);
-      currentProject.todos.forEach((currentTodo) => {
-        if (currentTodo.title !== todoName) {
-          aux.todos.push(currentTodo);
-        }
-      });
-      projectArray.push(aux);
-    } else {
-      projectArray.push(currentProject);
-    }
-  });
-  localStorage.setItem('project', JSON.stringify(projectArray));
-  display.displayTodos(projName, projectArray);
-}
-
 window.onload = () => {
-  init();
+  operation.init(projectArray);
 };
 
 document.querySelector('.new-list').addEventListener('click', () => {
@@ -111,19 +35,14 @@ document.querySelector('.list-form').addEventListener('click', (event) => {
       dueDate: document.getElementById('date').value,
       priority: document.getElementById('priority').value,
     };
-    populate(whichProject, todoItem);
+    operation.populate(whichProject, todoItem, projectArray);
     display.deleteListForm();
     style.unblur();
-    init();
+    operation.init(projectArray);
   }
 });
 
-document.getElementById('btn-create__project').addEventListener('click', () => {
-  if (!document.getElementById('form-project')) {
-    display.createProjectForm();
-    style.blur();
-  }
-});
+event.formProject();
 
 document.querySelector('.forms').addEventListener('click', (event) => {
   event.preventDefault();
@@ -136,35 +55,20 @@ document.querySelector('.forms').addEventListener('click', (event) => {
     projectArray.push(newProject);
     localStorage.setItem('project', JSON.stringify(projectArray));
     display.deleteProjectForm();
-    populateArray();
+    operation.populateArray();
     style.unblur();
-    init();
+    operation.init(projectArray);
   }
 });
 
-document.querySelector('.project-names').addEventListener('click', (event) => {
-  if (/^proj-/.test(event.target.id)) {
-    document.querySelector('.project-active').classList.remove('project-active');
-    document.getElementById(event.target.id).classList.add('project-active');
-    const projIndex = event.target.id[event.target.id.length - 1];
-    display.displayTodos(projectArray[projIndex].title, projectArray);
-  }
-});
-
-document.querySelector('.project-list__content').addEventListener('click', (event) => {
-  if (/trash/.test(event.target.classList)) {
-    const splitID = event.target.parentNode.parentNode.parentNode.id.split('-');
-    const projID = splitID[1];
-    const todoID = splitID[3];
-    deleteTodo(projectArray[projID].title, projectArray[projID].todos[todoID].title);
-  }
-});
+event.createProject(projectArray);
+event.deleteProject(projectArray);
 
 document.querySelector('.project-names').addEventListener('click', (event) => {
   if (/trash/.test(event.target.classList)) {
     const splitID = event.target.id.split('-');
     const projID = splitID[2];
-    deleteProject(projectArray[projID].title);
+    operation.deleteProject(projectArray[projID].title);
   }
 });
 
