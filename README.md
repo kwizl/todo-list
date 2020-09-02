@@ -20,7 +20,7 @@ Full Project Description [here](https://www.theodinproject.com/courses/javascrip
 ## Features
 
 <ul>
-  <p>**In this App the users can:**</p>
+  <p>###In this App the users can:</p>
   <li>Register Projects</li>
   <li>Edit Projects</li>
   <li>Delete Projects</li>
