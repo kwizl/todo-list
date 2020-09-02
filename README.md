@@ -1,11 +1,12 @@
 # todo-list
-This app is a ToDo-List Developed for Managing an Agenda. Full Project Description [here](https://www.theodinproject.com/courses/javascript/lessons/todo-list)
+This app is a ToDo-List Developed for Managing an Agenda. A user creates a project and then creates a list or lists of todos that belong to the particular project. The project can be edited or deleted which will delete the corresponding todos of the project. The user can also edit or delete the individual todos of the project.Eventually the data will be saved on the browser.
+Full Project Description [here](https://www.theodinproject.com/courses/javascript/lessons/todo-list)
 ## Screenshots
 
 ![screenshot](https://cdn.mathpix.com/snip/images/4u-Vh2ToFZG8S8MeQg_8TGxzd0Q8vfYjBF-EXSibRCg.original.fullsize.png)
 
 ## Online Version
- [Live Demo ]()
+ [Live Demo ](https://kwizl.github.io/todo-list/)
 
 ## Content
 
@@ -19,7 +20,7 @@ This app is a ToDo-List Developed for Managing an Agenda. Full Project Descripti
 ## Features
 
 <ul>
-  <p>In this App the users can:</p>
+  <p>**In this App the users can:**</p>
   <li>Register Projects</li>
   <li>Edit Projects</li>
   <li>Delete Projects</li>
