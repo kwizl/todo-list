@@ -1,4 +1,4 @@
-# todo-list
+# Todo-list
 This app is a ToDo-List Developed for Managing an Agenda. A user creates a project and then creates a list or lists of todos that belong to the particular project. The project can be edited or deleted which will delete the corresponding todos of the project. The user can also edit or delete the individual todos of the project.Eventually the data will be saved on the browser.
 Full Project Description [here](https://www.theodinproject.com/courses/javascript/lessons/todo-list)
 ## Screenshots
