@@ -1,4 +1,4 @@
-import { Events } from './controllers/event';
+import { Events } from './controllers/events';
 import { Operations } from './controllers/operations';
 
 const event = Events();

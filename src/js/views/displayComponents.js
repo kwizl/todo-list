@@ -1,4 +1,8 @@
+import { Data } from './displayData';
+
 const Display = () => {
+  const contentData = Data();
+
   const createProjectForm = () => {
     const projectForm = document.querySelector('.forms');
     const newHTML = `<form id="form-project" class="project-form active">
@@ -94,16 +98,8 @@ const Display = () => {
     formList.parentNode.removeChild(formList);
   };
 
-  const deleteProjectsDisplayed = () => {
-    document.querySelector('.project-names').innerHTML = '';
-  };
-
-  const deleteTodosDisplayed = () => {
-    document.querySelector('.project-list__content').innerHTML = '';
-  };
-
   const displayProjects = (listOfProjects) => {
-    deleteProjectsDisplayed();
+    contentData.deleteProjectsDisplayed();
     const divNames = document.querySelector('.project-names');
     listOfProjects.forEach((current, index) => {
       const newHTML = `<div class="div-item">
@@ -122,7 +118,7 @@ const Display = () => {
   };
 
   const displayTodos = (projName, listOfProjects) => {
-    deleteTodosDisplayed();
+    contentData.deleteTodosDisplayed();
     const divList = document.querySelector('.project-list__content');
     listOfProjects.forEach((currentProject, prjIndex) => {
       if (currentProject.title === projName) {

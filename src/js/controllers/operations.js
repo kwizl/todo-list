@@ -1,4 +1,4 @@
-import { Display } from '../views/display';
+import { Display } from '../views/displayComponents';
 import { Project } from '../modules/project';
 
 const Operations = () => {

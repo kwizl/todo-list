@@ -1,13 +1,14 @@
-import { Display } from '../views/display';
-import { Style } from '../views/displayStyle';
+import { Display } from '../views/displayComponents';
+import { Style } from '../views/displayStyles';
 import { Operations } from './operations';
 import { Project } from '../modules/project';
+import { Data } from '../views/displayData';
 
 const Events = () => {
   const display = Display();
   const style = Style();
   const operation = Operations();
-
+  const contentData = Data();
 
   const formList = (projectArray) => {
     document.querySelector('.new-list').addEventListener('click', () => {
@@ -106,7 +107,7 @@ const Events = () => {
         const splitID = event.target.id.split('-')[2];
         display.updateProject(splitID);
         style.blur();
-        document.getElementById('proj-title').value = projectArray[splitID].title;
+        contentData.projectTitle(projectArray, splitID);
       }
     });
   };
@@ -134,10 +135,7 @@ const Events = () => {
         const todoID = splitID[3];
         display.updateList(projID, todoID);
         style.blur();
-        document.getElementById('title').value = projectArray[projID].todos[todoID].title;
-        document.getElementById('desc').value = projectArray[projID].todos[todoID].description;
-        document.getElementById('date').value = projectArray[projID].todos[todoID].dueDate;
-        document.getElementById('priority').value = projectArray[projID].todos[todoID].priority;
+        contentData.listViewContent(projectArray, projID, todoID);
       }
     });
   };
@@ -151,10 +149,7 @@ const Events = () => {
         const todoIndex = splitID[1];
         const aux = JSON.parse(localStorage.getItem('project'));
 
-        aux[projIndex].todos[todoIndex].title = document.getElementById('title').value;
-        aux[projIndex].todos[todoIndex].description = document.getElementById('desc').value;
-        aux[projIndex].todos[todoIndex].dueDate = document.getElementById('date').value;
-        aux[projIndex].todos[todoIndex].priority = document.getElementById('priority').value;
+        contentData.listViewUpdate(aux, projIndex, todoIndex);
 
         localStorage.setItem('project', JSON.stringify(aux));
         display.deleteListForm();
